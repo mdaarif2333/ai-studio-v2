@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Studio V2</title>
+<style>
+body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:20px}
+h1{color:#22c55e}
+textarea{width:90%;max-width:600px;height:120px;background:#111;color:#fff;border:1px solid #333;border-radius:10px;padding:12px;font-size:16px}
+button{padding:14px 32px;background:#22c55e;border:none;border-radius:10px;font-weight:bold;margin-top:12px;font-size:16px;cursor:pointer}
+#out{margin:20px auto 0;max-width:600px;background:#111;padding:15px;border-radius:10px;white-space:pre-wrap;text-align:left;border:1px solid #222}
+</style>
+</head>
+<body>
+<h1>AI STUDIO V2 🚀</h1>
+<p>Apna AI App Live Hai</p>
+<textarea id="inp" placeholder="Kuch bhi likho... Jaise: Ek shayari likho"></textarea><br>
+<button onclick="gen()">Generate ✨</button>
+<div id="out">Jawab yahan aayega...</div>
+<script>
+async function gen(){
+  const p=document.getElementById('inp').value;
+  if(!p) return alert('Pehle kuch likho!');
+  document.getElementById('out').innerText='Soch raha hu...';
+  const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:p})});
+  const d=await r.json();
+  document.getElementById('out').innerText=d.reply;
+}
+</script>
+</body>
+</html>
